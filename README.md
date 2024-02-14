@@ -28,9 +28,10 @@ The core of the framework, where all test cases are defined. This directory is s
 
 ### Prerequisites
 
-Ensure you have Python 3.x installed on your system. The framework is designed to be compatible with modern Python versions.
+- Ensure you have Python 3.x installed on your system. The framework is designed to be compatible with modern Python versions.
+- And you are comfortable to use command line tools like `Terminal` for example on Mac and `Command Prompt` on Windows.
 
-## Basic setup and installation
+#### Basic setup and installation
 - install python 3.12 (install for local user only works; win: use the Windows AppStore)
 - figure out where your system thinks your python 3 lives: `python --version`
   - if this returns something like `Python 3.12.2`, python 3 is your default python version
@@ -47,12 +48,12 @@ Ensure you have Python 3.x installed on your system. The framework is designed t
 
 When you're done executing the tests, deactivate the virtual environment by typing `deactivate`.
 
-### Some explanations on the above instructions
+#### Some explanations on the above instructions
 - Mac and linux come with Python 2 installed as part of the OS; Windows does not. So for the former you'll likely have to use the `python3` thing, for Windows not.
 - Virtual environments allow you to create an isolated python environment in which you install repo-specific libraries. It's better than the alternative of dependency hell.
 
 
-## Setting up a pre-commit hook
+#### Setting up a pre-commit hook
 If you want to run `flake8` (linting tool) automatically before every commit, you can set up a git pre-commit hook:
 1. install the [pre-commit framework](https://pre-commit.com/#install)
 1. include [flake8 as a pre-commit hook](https://flake8.pycqa.org/en/latest/user/using-hooks.html#usage-with-the-pre-commit-git-hooks-framework)
