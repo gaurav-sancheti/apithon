@@ -30,13 +30,35 @@ The core of the framework, where all test cases are defined. This directory is s
 
 Ensure you have Python 3.x installed on your system. The framework is designed to be compatible with modern Python versions.
 
-### Setup
+## Basic setup and installation
+- install python 3.12 (install for local user only works; win: use the Windows AppStore)
+- figure out where your system thinks your python 3 lives: `python --version`
+  - if this returns something like `Python 3.12.2`, python 3 is your default python version
+  - if this return something else, check if `python3 --version` returns something like `Python 3.12.2`
+  - if `python3 --version` also returns something else, something has gone wrong in an interesting way
+- Make sure you have git installed on your machine.
+- clone this repository `git clone https://github.com/gaurav-sancheti/apithon/tree/main`
+- go into the repository directory
+- create a virtual environment named `venv`:
+  - if python 3 is your default python: `python -m venv venv`
+  - if it isn't: `python3 -m venv venv`
+- activate the virtual environment: mac/linux: `source venv/bin/activate`, win: `venv\Scripts\activate` (CMD.exe and Powershell.exe supported)
+- install necessary libraries: `pip install -r requirements.txt`
 
-1. Clone or download the framework to your local environment.
-2. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+When you're done executing the tests, deactivate the virtual environment by typing `deactivate`.
+
+### Some explanations on the above instructions
+- Mac and linux come with Python 2 installed as part of the OS; Windows does not. So for the former you'll likely have to use the `python3` thing, for Windows not.
+- Virtual environments allow you to create an isolated python environment in which you install repo-specific libraries. It's better than the alternative of dependency hell.
+
+
+## Setting up a pre-commit hook
+If you want to run `flake8` (linting tool) automatically before every commit, you can set up a git pre-commit hook:
+1. install the [pre-commit framework](https://pre-commit.com/#install)
+1. include [flake8 as a pre-commit hook](https://flake8.pycqa.org/en/latest/user/using-hooks.html#usage-with-the-pre-commit-git-hooks-framework)
+1. run `pre-commit install` to install the flake8 pre-commit hook
+
+Note that running the hook for the very first time may take some time, because it will download and install the hook.
 
 ## Running tests with pytests
 The API tests can be run with pytest. You can do this from the command line or from Pycharm.
