@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Brand Service</title>
+<title>Company Service OData</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,27 +437,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Brand Service</h1>
+<h1>Company Service OData</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_version_history">1. Version History</a></li>
 <li><a href="#_common">2. Common</a>
 <ul class="sectlevel2">
-<li><a href="#_resources">2.1. Resources</a></li>
-<li><a href="#_base_url">2.2. Base URL</a></li>
-<li><a href="#_all_endpoints">2.3. All Endpoints</a></li>
+<li><a href="#_base_url">2.1. Base URL</a></li>
+<li><a href="#_resources">2.2. Resources</a></li>
+<li><a href="#_authorization">2.3. Authorization</a></li>
 </ul>
 </li>
-<li><a href="#_resources_2">3. Resources</a>
+<li><a href="#_consuming_odata">3. Consuming OData</a>
 <ul class="sectlevel2">
-<li><a href="#_brand">3.1. Brand</a></li>
-</ul>
-</li>
-<li><a href="#_error_responses_3">4. Error Responses</a>
-<ul class="sectlevel2">
-<li><a href="#_error_response_formats">4.1. Error Response Formats</a></li>
-<li><a href="#authentication-errors">4.2. Authentication Errors</a></li>
+<li><a href="#__default_data_hub">3.1.  Default (Data Hub)</a></li>
+<li><a href="#_custom_query_options">3.2. Custom Query Options</a></li>
+<li><a href="#_page_size">3.3. Page Size</a></li>
+<li><a href="#_success_response_payload_example">3.4. Success Response Payload Example</a></li>
+<li><a href="#_error_response_payload_example">3.5. Error Response Payload Example</a></li>
 </ul>
 </li>
 </ul>
@@ -497,171 +495,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_common">2. Common</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This app provides a service for apps that take care of the UI of the company brand configuration. It allows applications to create, retrieve and update the brand (such as the logo) of a company.</p>
+<p>This  OData V3 implementation provides a service for  platform applications to (bulk) retrieve company data. This service only supports read access. For retrieving a single company, and for create/update/delete functionality, there is a Company Service REST API for which there are separate specs.</p>
 </div>
 <div class="sect2">
-<h3 id="_resources">2.1. Resources</h3>
+<h3 id="_base_url">2.1. Base URL</h3>
+<div class="paragraph">
+<p>The base URL for the Company Service OData API is:
+<code><a href="https://companies..com/odata/company-service/v1" class="bare">https://companies..com/odata/company-service/v1</a></code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_resources">2.2. Resources</h3>
 <div class="sect3">
-<h4 id="_company_brand">2.1.1. Company Brand</h4>
+<h4 id="_company">2.2.1. Company</h4>
 <div class="paragraph">
-<p>The company brand resource holds the details of a company brand.</p>
+<p>Resource that holds the details of a company.</p>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_base_url">2.2. Base URL</h3>
-<div class="paragraph">
-<p>The base URL for the Company Brand Service REST API is:
-<code>companies..com/rest/brand-service/v1</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_all_endpoints">2.3. All Endpoints</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
 <col style="width: 60%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">API</th>
-<th class="tableblock halign-left valign-middle">Resource</th>
-<th class="tableblock halign-left valign-middle">Endpoint</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>REST</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Company Brand</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><a href="#patch-brand">PATCH <code>/companies/{company_id}/brand</code> - Update the company brand resource</a><br>
-<a href="#get-brand">GET <code>/companies/{company_id}/brand</code> - Retrieve the company brand resource</a></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_resources_2">3. Resources</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_brand">3.1. Brand</h3>
-<div class="sect3">
-<h4 id="patch-brand">3.1.1. PATCH <code>/companies/{company_id}/brand</code> - Update the company brand resource</h4>
-<div class="paragraph">
-<p>Operation to update the company brand resource. Typically used when:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The company brand is updated via the app taking care of the UI of the company brand configuration.</p>
-</li>
-</ul>
-</div>
-<div class="sect4">
-<h5 id="_request_headers">Request Headers</h5>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 33.3333%;">
-<col style="width: 50.0001%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Value</th>
-<th class="tableblock halign-left valign-middle">Note</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Authorization</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Bearer &lt;token&gt;</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>JSON Web Token containing a client <code>ACCESS_TOKEN</code> with the <code>mx:company:brand:write</code> scope.<br>
-(MUST use OAuth2 secured end points)</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Content-type</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><code>application/json; charset=utf-8</code></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>User-Id</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>&lt;UUID&gt;</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>The user ID of the user that is initiating the request from Control Center.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_request_parameters">Request Parameters</h5>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Query</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">company_id<br>
-<em>required</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Body</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">body<br>
-<em>required</em></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_request_payload_example">Request Payload Example</h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-  "logo": {
-    "base64Content": "Base64 encoded image"
-  },
-  "coverImage": {
-    "base64Content": "Base64 encoded image"
-  }
-}</code></pre>
-</div>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 37.5%;">
-<col style="width: 12.5%;">
-<col style="width: 50%;">
 </colgroup>
 <thead>
 <tr>
@@ -673,198 +527,310 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><code>logo</code><br>
-<em>optional</em></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Object</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Logo object. Must be left out if the logo does not need to be updated.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><code>logo.base64Content</code><br>
-<em>required</em></p>
+<p><code>companyId</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
 <p>String</p>
 </div></div></td>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Base64 binary representation of an image (allowed extensions: <code>.jpg</code> or <code>.png</code>). Must be set to empty if the logo needs to be removed.</p>
+<p>Unique id that identifies the company in the platform. Not always a UUID.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><code>coverImage</code><br>
-<em>optional</em></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Object</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Cover image object. Must be left out if the cover image does not need to be updated.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><code>coverImage.base64Content</code><br>
-<em>required</em></p>
+<p><code>name</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
 <p>String</p>
 </div></div></td>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Base64 binary representation of an image (allowed extensions: <code>.jpg</code> or <code>.png</code>). Must be set to empty if the cover image needs to be removed.</p>
+<p>Name of the company.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>description</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Description of the company.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>createdAt</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>DateTime</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Date and time the company has been created in the platform (UTC).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>modifiedAt</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>DateTime</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Date and time the company has been last modified in the platform (UTC). Gets updated in case of a change of the following company attributes: <code>name</code>, <code>description</code>, <code>digitallySignEmails</code>, and in case of a change in the company email domains.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>emailDomains</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>List of EmailDomain objects</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Email domains of the company. Always returns a list, though some companies only have one email domain attached to it.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>contacts</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>List of Contact objects</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Contacts of the company.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>contactRequests</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>List of ContactRequest objects</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Contact requests of the company that first need to be validated before they can become actual company contacts.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_success_response">Success Response</h5>
+<div class="sect3">
+<h4 id="_email_domain">2.2.2. Email Domain</h4>
+<div class="paragraph">
+<p>Resource that holds the details of an email domain of a company.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 40%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
 <col style="width: 60%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-middle">Status</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Type</th>
 <th class="tableblock halign-left valign-middle">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>200</strong></p>
+<p><code>domain</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>OK</p>
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Email domain.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>company</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Company object</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Company to which the email domain belongs.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="sect4">
-<h5 id="_success_response_payload">Success Response Payload</h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-  "logo": {
-    "location": "string"
-  },
-  "coverImage": {
-    "location": "string"
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_error_responses">Error Responses</h5>
-<div class="paragraph">
-<p>Authentication error responses can be found <a href="#authentication-errors">here</a>.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 6.6666%;">
-<col style="width: 13.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 13.3335%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Code</th>
-<th class="tableblock halign-left valign-middle">Message</th>
-<th class="tableblock halign-left valign-middle">Detail</th>
-<th class="tableblock halign-left valign-middle">Reason (optional)</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>400</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Invalid company ID</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>No company exists for the provided company ID: {companyId}</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>-</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><a href="#-error-response-format"> RFC 7807</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>400</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>The request data did not validate</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>One or more attributes in the request are invalid.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>The file extension is not supported.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><a href="#-error-response-format"> RFC 7807</a></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 33.3333%;">
-<col style="width: 44.4445%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Status</th>
-<th class="tableblock halign-left valign-middle">Message</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>500</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>An unexpected error occurred.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><a href="#-error-response-format"> Error Response</a></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<hr>
-</div>
 </div>
 <div class="sect3">
-<h4 id="get-brand">3.1.2. GET <code>/companies/{company_id}/brand</code> - Retrieve the company brand resource</h4>
+<h4 id="_contact">2.2.3. Contact</h4>
 <div class="paragraph">
-<p>Operation to retrieve the company brand resource. Typically used when:</p>
+<p>Resource that holds the details of a company contact.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>The company brand is displayed in the app taking care of the UI of the company brand configuration.</p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>contactId</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Unique identifier of the contact (UUID).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>typeId</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Identifier of the contact type. Available options: <code>security</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>emailAddress</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Email address of the contact.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>name</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Display name of the contact.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>company</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Company object</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Company to which the contact belongs.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="sect4">
-<h5 id="_request_headers_2">Request Headers</h5>
+<div class="sect3">
+<h4 id="_contact_request">2.2.4. Contact Request</h4>
+<div class="paragraph">
+<p>Resource that holds the details of a company contact request that needs to be validated before it becomes an actual company contact.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>requestId</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Unique identifier of the contact request (UUID).</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>typeId</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Identifier of the contact type. Available options: <code>security</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>emailAddress</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Email address of the contact.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>name</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>String</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Display name of the contact.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>createdDate</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>DateTime</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Created date of the contact request.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><code>company</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Company object</p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>Company to which the contact request belongs.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_authorization">2.3. Authorization</h3>
+<div class="paragraph">
+<p>Authorization for the OData service is done using the following HTTP header:</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -888,34 +854,107 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_request_parameters_2">Request Parameters</h5>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Query</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">company_id<br>
-<em>required</em></p></td>
-</tr>
-</tbody>
-</table>
 </div>
-<div class="sect4">
-<h5 id="_success_response_2">Success Response</h5>
+</div>
+<div class="sect1">
+<h2 id="_consuming_odata">3. Consuming OData</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="__default_data_hub">3.1.  Default (Data Hub)</h3>
+<div class="paragraph">
+<p>The OData service can be consumed in a  app by creating a Consumed OData Service. After setting it up, you can use the Data Hub panel in the modeler to get the external entities. For the Consumed OData Service you will need the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Service URL: this is the base URL of the Company Service OData API.</p>
+</li>
+<li>
+<p>Metadata file: request this via the Control Center team (Slack: #control-center).</p>
+</li>
+<li>
+<p>Provide the correct authorization header.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The OData service can also be consumed via regular HTTP requests. Information about the requests and responses can be found below.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_custom_query_options">3.2. Custom Query Options</h3>
+<div class="paragraph">
+<p> OData V3 implementation - Query options can be found in the <a href="https://docs..com/refguide/odata-query-options"> Documentation</a>.
+For example, in order to retrieve associated email domains to the company, use the <code>$expand</code> query parameter.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_page_size">3.3. Page Size</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The maximum number of objects or entries (in the OData feed) per page is 1000.</p>
+</li>
+<li>
+<p>When you are trying to retrieve more than 1000 objects, the location of the next data set can be found at the bottom of the atom xml response, as shown in the example below:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;link rel="next" href="https://companies..com/odata/company-service/v1/companies?$skip=1000" /&gt;</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_success_response_payload_example">3.4. Success Response Payload Example</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;feed xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xml:base="https://companies-test..com/odata/company-service/v1/"&gt;
+   &lt;id&gt;https://companies-test..com/odata/company-service/v1/companies&lt;/id&gt;
+   &lt;title&gt;companies&lt;/title&gt;
+   &lt;updated&gt;2021-08-04T11:57:18.599Z&lt;/updated&gt;
+   &lt;link rel="self" title="companies" href="companies" /&gt;
+   &lt;entry&gt;
+      &lt;id&gt;https://companies-test..com/odata/company-service/v1/companies(5910974510926577)&lt;/id&gt;
+      &lt;category scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" term="CompanyService.company" /&gt;
+      &lt;link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/emailDomain" type="application/atom+xml;type=entry" title="emailDomain" href="companies(5910974510926577)/emailDomain"&gt;
+         &lt;m:inline&gt;
+            &lt;entry&gt;
+               &lt;id&gt;https://companies-test..com/odata/company-service/v1/emailDomain(12103423998560509)&lt;/id&gt;
+               &lt;category scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" term="CompanyService.emailDomain" /&gt;
+               &lt;link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Company" type="application/atom+xml;type=entry" title="Company" href="emailDomain(12103423998560509)/Company" /&gt;
+               &lt;title /&gt;
+               &lt;updated&gt;2021-12-02T18:58:01.947Z&lt;/updated&gt;
+               &lt;content type="application/xml"&gt;
+                  &lt;m:properties&gt;
+                     &lt;d:emailDomain m:type="Edm.String"&gt;example@domain.com&lt;/d:emailDomain&gt;
+                  &lt;/m:properties&gt;
+               &lt;/content&gt;
+            &lt;/entry&gt;
+         &lt;/m:inline&gt;
+      &lt;/link&gt;
+      &lt;title /&gt;
+      &lt;updated&gt;1970-01-01T00:00:00.000Z&lt;/updated&gt;
+      &lt;content type="application/xml"&gt;
+         &lt;m:properties&gt;
+            &lt;d:objectId m:type="Edm.Int64"&gt;5910974510926577&lt;/d:objectId&gt;
+            &lt;d:companyId m:type="Edm.String"&gt;6ce80511-3f43-4702-ae2c-b7f3f777cbe1&lt;/d:companyId&gt;
+            &lt;d:name m:type="Edm.String"&gt;&lt;/d:name&gt;
+            &lt;d:description m:type="Edm.String"&gt;test&lt;/d:description&gt;
+            &lt;d:createdAt m:type="Edm.DateTimeOffset"&gt;2013-06-19T07:53:51.998Z&lt;/d:createdAt&gt;
+            &lt;d:modifiedAt m:type="Edm.DateTimeOffset"&gt;2020-06-24T11:46:26.261Z&lt;/d:modifiedAt&gt;
+         &lt;/m:properties&gt;
+      &lt;/content&gt;
+   &lt;/entry&gt;
+&lt;/feed&gt;</code></pre>
+</div>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 40%;">
+<col style="width: 60%;">
 </colgroup>
 <thead>
 <tr>
@@ -935,221 +974,43 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_success_response_payload_2">Success Response Payload</h5>
+<div class="sect2">
+<h3 id="_error_response_payload_example">3.5. Error Response Payload Example</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-  "logo": {
-    "location": "string"
-  },
-  "coverImage": {
-    "location": "string"
-  }
-}</code></pre>
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;error xmlns="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"&gt;
+   &lt;code&gt;401&lt;/code&gt;
+   &lt;message xml:lang="en-US"&gt;You are not authorized to access this resource&lt;/message&gt;
+&lt;/error&gt;</code></pre>
 </div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_error_responses_2">Error Responses</h5>
-<div class="paragraph">
-<p>Authentication error responses can be found <a href="#authentication-errors">here</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 10%;">
-<col style="width: 20%;">
-<col style="width: 50%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Code</th>
-<th class="tableblock halign-left valign-middle">Message</th>
-<th class="tableblock halign-left valign-middle">Detail</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>400</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Invalid company ID</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>No company exists for the provided company ID: {companyId}</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><a href="#error-response-format"> RFC 7807</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>404</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Not Found</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>{request}</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><a href="#error-response-format"> RFC 7807</a></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 22.2222%;">
-<col style="width: 33.3333%;">
-<col style="width: 44.4445%;">
+<col style="width: 40%;">
+<col style="width: 60%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-middle">Status</th>
 <th class="tableblock halign-left valign-middle">Message</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p><strong>401</strong></p>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
+<p>You are not authorized to access this resource</p>
+</div></div></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
 <p><strong>500</strong></p>
 </div></div></td>
 <td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
 <p>An unexpected error occurred.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><a href="#-error-response-format"> Error Response</a></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<hr>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_error_responses_3">4. Error Responses</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_error_response_formats">4.1. Error Response Formats</h3>
-<div class="sect4">
-<h5 id="error-response-format"> RFC 7807</h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-   "error":{
-      "message": "The request data did not validate",
-      "detail": "One or more attributes in the request are invalid.",
-      "code": 400,
-      "instance": "urn:id",
-      "invalid-params":[
-         {
-            "name": "coverImage",
-            "reason": "The file extension is not supported."
-         }
-      ]
-
-   }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="-error-response-format"> Default</h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
-   "error":{
-      "code":500,
-      "message":"An unexpected error occurred."
-   }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="authentication-errors">4.2. Authentication Errors</h3>
-<div class="paragraph">
-<p>All authentication errors use the <a href="#error-response-format"> RFC 7807</a> error response format.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 9.0909%;">
-<col style="width: 27.2727%;">
-<col style="width: 18.1818%;">
-<col style="width: 45.4546%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Code</th>
-<th class="tableblock halign-left valign-middle">Headers</th>
-<th class="tableblock halign-left valign-middle">Message</th>
-<th class="tableblock halign-left valign-middle">Detail</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>401</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><code>WWW-Authenticate</code> (string)</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Unauthorized</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>No access token provided in the request.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>401</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><code>WWW-Authenticate</code> (string)</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Unauthorized</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Token introspection failed.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>401</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><code>WWW-Authenticate</code> (string)</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Unauthorized</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Access token is non-existent or expired.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p><strong>403</strong></p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>n/a</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Forbidden</p>
-</div></div></td>
-<td class="tableblock halign-left valign-middle"><div class="content"><div class="paragraph">
-<p>Access token does not include the required scope.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1160,7 +1021,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-14 21:29:23 +0530
+Last updated 2024-02-14 21:29:16 +0530
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
