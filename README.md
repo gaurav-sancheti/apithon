@@ -74,3 +74,15 @@ The framework adopts a structured approach to API testing, encouraging clear sep
 - **Modular Design**: Organizes tests by service and functionality, allowing for targeted testing and easier maintenance.
 - **Data-Driven Testing**: Leverages `environment_data` and `resources` to parameterize tests, facilitating comprehensive test coverage across different scenarios.
 - **Extensibility**: Designed to easily accommodate new tests and resources as your API evolves.
+
+
+## Additional resources
+- Pytest docs: https://docs.pytest.org/en/latest/contents.html
+- Pytest API reference: https://docs.pytest.org/en/latest/reference.html
+- Requests library: https://requests.kennethreitz.org/en/master/
+- Python Selenium API docs: http://selenium-python.readthedocs.io/api.html
+- JSON schema: https://json-schema.org/understanding-json-schema/
+- XML schema: https://xmlschema.readthedocs.io/en/latest/index.html
+- Schema library: https://pypi.org/project/schema/
+- Locust.io: https://locust.io/
+
