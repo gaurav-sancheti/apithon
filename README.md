@@ -23,7 +23,6 @@ A repository for additional files that tests may require, such as JSON schemas f
 The core of the framework, where all test cases are defined. This directory is structured to reflect the API's structure, with subdirectories for different services or resource types. It includes:
 
 - **`tests.api_tests/`**: Contains test modules for each API endpoint, organized by service.
-- **`tests.utils/`**: Utility functions and classes that support test implementation, such as custom assertions or setup and teardown routines.
 
 ## Getting Started
 
@@ -39,21 +38,34 @@ Ensure you have Python 3.x installed on your system. The framework is designed t
    pip install -r requirements.txt
    ```
 
-### Executing Tests
+## Running tests with pytests
+The API tests can be run with pytest. You can do this from the command line or from Pycharm.
 
-- **Run all tests for a service**:
-  Navigate to the framework's root directory and execute:
-  ```bash
-  python -m unittest discover -s tests/api_tests/company_service
-  ```
-  This command runs all tests within the `company_service` module.
+### Running from the command line
+`pytest [command line arguments] [path to tests you want to run]`
 
-- **Run a specific test**:
-  Specify the test module and test case:
-  ```bash
-  python -m unittest tests.api_tests.company_service.test_get_company_happy_paths.TestGetCompany
-  ```
-  This runs the `TestGetCompany` test case within the `test_get_company_happy_paths` module.
+If you omit the path, pytest will collect all tests in the current directory and its sub-directories.
+
+Command line arguments: 
+- `--env { test | accp | local_{app_name} | docker }`: determines which environment data file to load. Defaults to `None`.
+- `--random-order`: runs tests in a random order; for more options see https://pypi.org/project/pytest-random-order/.
+
+Examples
+* company service example: `pytest --env test --random-order tests/api_tests/company_service/`
+
+To see a list of tests in a directory or module, use `--collect-only -q`.
+For more command-line options, see https://docs.pytest.org/en/latest/usage.html
+
+
+### Running with Pycharm
+To run tests from within Pycharm:
+- File > Settings > Project > Project Interpreter: set to your virtual environment
+- File > Settings > Tools > Python Integrated Tools: set Default test runner to pytest
+- Run > Edit Configurations...
+    - go to Templates > Python tests > pytest
+    - Additional arguments: add `--env <env>`
+    - Python interpreter: select your virtual environment
+    - Working directory: set to root of repository
 
 ## Testing Strategy
 
