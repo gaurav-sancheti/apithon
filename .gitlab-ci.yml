@@ -1,4 +1,4 @@
-image: python:3.9
+image: python:3.12
 
 stages:
   - test
@@ -9,4 +9,4 @@ before_script:
 pytest:
   stage: test
   script:
-    - pytest
+    - pytest --env test --random-order tests/api_tests/company_service/

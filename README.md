@@ -99,6 +99,13 @@ The framework adopts a structured approach to API testing, encouraging clear sep
 - **Extensibility**: Designed to easily accommodate new tests and resources as your API evolves.
 
 
+## Running performance tests with Locust.io
+- Make sure to install locust on your machine like for example `pip install locust`
+- WebUI: `locust -f tests/performance_tests/company_service/company_service_odata_api.py`  
+- WebUI is available at http://0.0.0.0:8089/ (on Mac) or maybe something like http://127.0.0.1:8089/ (on Windows) after running locust on the command-line     
+- CLI: `locust -f tests/performance_tests/company_service/company_service_odata_api.py --headless --users 1000 --spawn-rate 100 --run-time 10m`
+
+
 ## Additional resources
 - Pytest docs: https://docs.pytest.org/en/latest/contents.html
 - Pytest API reference: https://docs.pytest.org/en/latest/reference.html
