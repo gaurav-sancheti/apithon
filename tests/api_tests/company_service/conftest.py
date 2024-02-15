@@ -1,10 +1,10 @@
 import pytest
-
 from api_clients.company_service.brand_service_rest_api import BrandServiceRESTAPI
 from api_clients.company_service.company_service_odata_api import CompanyServiceODataAPI
 from api_clients.company_service.company_service_rest_api import CompanyServiceRESTAPI, CompanyServiceRESTAPIApithon
 from api_clients.mxid3.mxid3_token_helper import MxID3TokenHelper
 from api_clients.mxid3.scopes_list import Scopes
+
 from environment_data.data_convertors import convert_string_to_base64_encoded_string
 from environment_data.data_generators import generate_random_email_domain, generate_random_string_of_letters
 from tests.api_tests.company_service.schemas import brand_response

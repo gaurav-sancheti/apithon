@@ -1,4 +1,4 @@
-from environment_data.data_generators import generate_random_email_domain, generate_random_string_of_letters,\
+from environment_data.data_generators import generate_random_email_domain, generate_random_string_of_letters, \
     generate_uuid
 from tests.api_tests.company_service.schemas import error_response
 

@@ -1,6 +1,7 @@
 import logging
 
 from api_clients.apithon import ApithonRestBasicAuth, ApithonRestJWT
+
 from environment_data.data_generators import generate_random_email_address, generate_random_email_domain, \
     generate_random_string_of_letters
 
