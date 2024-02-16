@@ -4,7 +4,6 @@ from random import choice
 
 
 def generate_random_email_address(email_domain=None, lower_case_only=False):
-    # (jsc) Sprintr lower-cases on account creation
     email_domain = email_domain if email_domain is not None else generate_random_string_of_letters(16) + '.test'
     email_address = 'apithon.' + generate_random_string_of_letters(10) + '@' + email_domain
 

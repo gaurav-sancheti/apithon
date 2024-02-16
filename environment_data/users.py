@@ -14,7 +14,6 @@ class AbstractUser:
 
 
 class PlatformUser(AbstractUser):
-    # ToDo (jsc): see if we can reduce the number of attributes
     def __init__(self, env_data=None, user_ref=None):
         super().__init__()
         self.logger = logging.getLogger("instr.log").getChild(__name__)

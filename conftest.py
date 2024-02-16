@@ -4,8 +4,6 @@ import pytest
 
 from environment_data import env_data_file_utils
 
-# (jsc) Enable pytest's assert rewriting for listed modules
-# https://docs.pytest.org/en/latest/assert.html#assertion-introspection-details
 pytest.register_assert_rewrite("openid_connect.token_helpers", "selenium_wd.userflow_helpers.stories",
                                "api_clients.sprintr.rfc_7807_validator")
 

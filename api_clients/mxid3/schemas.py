@@ -10,8 +10,6 @@ access_token_dict = {"sub": And(str, lambda s: len(s.strip()) > 0),
 access_token = Schema(access_token_dict,
                       ignore_extra_keys=True)
 
-# Leave the nonce and jti commented out since they are specific to CFUAA
-# Refresh token is not implemented in the mock-idp yet
 access_token_payload = Schema({"access_token": And(str, lambda s: len(s.strip()) > 0),
                                "refresh_token": And(str, lambda s: len(s.strip()) > 0),
                                "scope": And(str, lambda s: len(s.strip()) > 0),
